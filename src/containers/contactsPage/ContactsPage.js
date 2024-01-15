@@ -11,6 +11,7 @@ export const ContactsPage = ({contacts, addContacts}) => {
   const [currentName, setCurrentName] = useState("");
   const [currentPhone, setCurrentPhone] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
+  const [containsDuplicate, setContainsDuplicate] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ export const ContactsPage = ({contacts, addContacts}) => {
     Add contact info and clear data
     if the contact name is not a duplicate
     */
-   if (!contacts.includes(currentName)){
+   if (containsDuplicate === false){
     addContacts(currentName, currentPhone, currentEmail);
     setCurrentName('');
     setCurrentPhone('');
@@ -33,6 +34,9 @@ export const ContactsPage = ({contacts, addContacts}) => {
  useEffect(() => {
   if (contacts.includes(currentName)) {
     alert("Name being entered already exists in Contacts. Please use a different name or check below if you've already been added below.")
+    setContainsDuplicate(true);
+  } else {
+    setContainsDuplicate(false);
   }
  }, [contacts, currentName])
 
