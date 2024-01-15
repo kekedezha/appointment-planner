@@ -32,12 +32,14 @@ export const ContactsPage = ({contacts, addContacts}) => {
   contacts array variable in props
   */
  useEffect(() => {
-  if (contacts.includes(currentName)) {
+  for (let i = 0; i < contacts.length; i++) { 
+  if (contacts[i] === currentName) {
     alert("Name being entered already exists in Contacts. Please use a different name or check below if you've already been added below.")
     setContainsDuplicate(true);
   } else {
     setContainsDuplicate(false);
   }
+}
  }, [contacts, currentName])
 
 
@@ -57,7 +59,7 @@ export const ContactsPage = ({contacts, addContacts}) => {
       <hr />
       <section>
         <h2>Contacts</h2>
-        <TileList contacts={contacts}/>
+        <TileList list={contacts}/>
       </section>
     </div>
   );
